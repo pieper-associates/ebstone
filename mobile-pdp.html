@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=428, initial-scale=1.0">
+<title>EB Stone — Mobile PDP</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #ffffff;
+    --casal: #2e696f;
+    --casal-darker: #19454a;
+    --keyline: #bdd8db;
+    --mine-shaft: #3f3f3f;
+    --footer-dark: #2d2d2d;
+    --seashell: #eef7f5;
+    --sea-buckthorn: #fa9f29;
+    --body: #3f3f3f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #eaeaea;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+  }
+
+  .frame {
+    width: 428px;
+    background: #fff;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  /* ---------- Utility bar ---------- */
+  .utility-bar {
+    background: var(--casal-darker);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .utility-bar .search svg { display: block; }
+
+  /* ---------- Main nav ---------- */
+  .main-nav {
+    background: var(--casal);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+  }
+  .main-nav .logo {
+    font-family: 'Georgia', 'Sabon LT Pro', serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+  }
+  .main-nav .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+  }
+  .main-nav .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+  }
+  .store-btn {
+    background: var(--sea-buckthorn);
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- Breadcrumb (the one we just updated: +4px top/bottom) ---------- */
+  .breadcrumb {
+    padding: 18px 16px;
+    border-bottom: 1px solid var(--keyline);
+    font-size: 12px;
+    color: var(--casal);
+    font-weight: 500;
+  }
+  .breadcrumb a { color: var(--casal); text-decoration: none; }
+  .breadcrumb .sep { color: #9bbdc1; margin: 0 6px; }
+  .breadcrumb .current { color: var(--body); font-weight: 500; }
+
+  /* ---------- Product image ---------- */
+  .product-image {
+    width: 428px;
+    height: 428px;
+    background: var(--seashell);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-image .bag {
+    width: 260px;
+    height: 340px;
+    background:
+      linear-gradient(180deg, #4a3020 0%, #3a2515 80%, #2a1a0f 100%);
+    border-radius: 12px 12px 6px 6px;
+    position: relative;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.3);
+  }
+  .product-image .bag::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20px; right: 20px;
+    height: 42px;
+    background: #2a1810;
+    border-radius: 0 0 80% 80%;
+  }
+  .product-image .bag::after {
+    content: 'EB STONE';
+    position: absolute;
+    top: 70px; left: 0; right: 0;
+    text-align: center;
+    color: var(--sea-buckthorn);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    font-family: 'Georgia', serif;
+  }
+  .product-image .bag-label {
+    position: absolute;
+    top: 110px; left: 20px; right: 20px;
+    background: var(--seashell);
+    color: var(--casal-darker);
+    padding: 24px 16px 20px;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .product-image .bag-label .kicker {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--casal);
+    margin-bottom: 6px;
+  }
+  .product-image .bag-label .title {
+    font-family: 'Georgia', serif;
+    font-size: 22px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: var(--casal-darker);
+  }
+  .product-image .bag-label .desc {
+    font-size: 9px;
+    color: #5a5a5a;
+    margin-top: 10px;
+    line-height: 1.3;
+  }
+
+  /* ---------- Content ---------- */
+  .content {
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .pdp-title {
+    font-family: 'Georgia', 'Sabon LT Pro', serif;
+    color: var(--casal);
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 700;
+  }
+  .section h3 {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--casal-darker);
+    margin-bottom: 10px;
+  }
+  .section p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--body);
+  }
+
+  /* ---------- 2-col specs ---------- */
+  .specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .specs h3 {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--casal-darker);
+    margin-bottom: 10px;
+  }
+  .specs ul { list-style: none; }
+  .specs li {
+    font-size: 14px;
+    padding: 6px 0;
+    color: var(--body);
+    border-bottom: 1px solid var(--keyline);
+  }
+  .specs a {
+    color: var(--casal);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    background: var(--mine-shaft);
+    color: #fff;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .footer .col h4 {
+    font-family: 'Georgia', 'Sabon LT Pro', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+  .footer .col p,
+  .footer .col a {
+    color: #d0d0d0;
+    font-size: 13px;
+    line-height: 1.7;
+    text-decoration: none;
+    display: block;
+  }
+  .footer .connect .socials {
+    display: flex;
+    gap: 14px;
+    margin-top: 6px;
+    justify-content: flex-start;
+  }
+  .footer .connect .socials a {
+    width: 34px; height: 34px;
+    border: 1px solid #666;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .copyright {
+    background: var(--footer-dark);
+    color: #9a9a9a;
+    font-size: 11px;
+    padding: 16px;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+
+  .note {
+    width: 428px;
+    margin: 12px auto 0;
+    font-size: 11px;
+    color: #777;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+  }
+</style>
+</head>
+<body>
+  <div>
+    <div class="frame">
+      <!-- Utility bar -->
+      <div class="utility-bar">
+        <div>Dealer Portal</div>
+        <div class="search" aria-label="Search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Main nav -->
+      <div class="main-nav">
+        <div class="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="logo">EB STONE</div>
+        <div class="store-btn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          Store
+        </div>
+      </div>
+
+      <!-- Breadcrumb (padding 18 top/bottom, just bumped from 14) -->
+      <div class="breadcrumb">
+        <a href="#">Home</a><span class="sep">/</span>
+        <a href="#">Products</a><span class="sep">/</span>
+        <a href="#">Soils</a><span class="sep">/</span>
+        <span class="current">Azalea, Camellia & Acid Mix</span>
+      </div>
+
+      <!-- Product image -->
+      <div class="product-image">
+        <div class="bag">
+          <div class="bag-label">
+            <div class="kicker">Planting Mix</div>
+            <div class="title">Azalea, Camellia &amp; Acid Mix</div>
+            <div class="desc">An acidic, peat-based soil blend formulated for acid-loving plants.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <h1 class="pdp-title">Azalea, Camellia &amp; Acid Mix</h1>
+
+        <div class="section">
+          <h3>Highlights</h3>
+          <p>A rich, acidic blend specifically formulated for azaleas, camellias, rhododendrons, gardenias, and other acid-loving plants. Contains aged forest products, sphagnum peat moss, and composted fir bark.</p>
+        </div>
+
+        <div class="section">
+          <h3>Description</h3>
+          <p>EB Stone Azalea, Camellia &amp; Acid Mix provides the ideal growing environment for acid-loving plants. The blend is designed to retain moisture while maintaining proper drainage, with a lower pH that helps acid-loving varieties absorb the nutrients they need to thrive.</p>
+        </div>
+
+        <div class="section">
+          <h3>Additional Details</h3>
+          <p>Use as a planting mix or soil amendment. Mix thoroughly with native soil when planting in the ground, or use straight in containers. For best results, apply a top dressing annually.</p>
+        </div>
+
+        <!-- Two-column specs -->
+        <div class="specs">
+          <div>
+            <h3>Available Sizes</h3>
+            <ul>
+              <li>1.5 cu. ft.</li>
+              <li>3 cu. ft.</li>
+              <li>Bulk</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Downloads</h3>
+            <ul>
+              <li><a href="#">Spec Sheet ↓</a></li>
+              <li><a href="#">Label PDF ↓</a></li>
+              <li><a href="#">SDS ↓</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="col about">
+          <h4>About</h4>
+          <p>EB Stone &amp; Son has been producing premium organic soil amendments and fertilizers since 1930.</p>
+        </div>
+        <div class="col touch">
+          <h4>Get In Touch</h4>
+          <a href="tel:7077963600">(707) 796-3600</a>
+          <a href="#">P.O. Box 1617, Suisun, CA 94585</a>
+          <a href="mailto:info@ebstone.org">info@ebstone.org</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="col connect">
+          <h4>Connect</h4>
+          <div class="socials">
+            <a href="#" aria-label="Facebook">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.7-1.8C18.2 5 12 5 12 5s-6.2 0-7.9.5A2.5 2.5 0 0 0 2.4 7.3C2 8.8 2 12 2 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.7 1.8C5.8 19 12 19 12 19s6.2 0 7.9-.5a2.5 2.5 0 0 0 1.7-1.8C22 15.2 22 12 22 12zM10 15V9l5.2 3z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">© 2026 EB Stone &amp; Son. All rights reserved.</div>
+    </div>
+
+    <div class="note">428px mobile frame · Breadcrumb padding 18px top/bottom (+4 from 14)</div>
+  </div>
+</body>
+</html>
