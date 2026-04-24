@@ -14,7 +14,7 @@
   --seashell: #eef7f5;
   --sea-buckthorn: #fa9f29;
   --body: #3f3f3f;
-  --serif: 'Georgia', 'Sabon LT Pro', serif;
+  --serif: 'Sabon LT Pro', 'Georgia', serif;
 }
 
 /* ===== Reset ===== */
@@ -22,18 +22,67 @@
 html, body {
   background: #fff;
   font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  line-height: 27px;
   color: var(--body);
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
+a { color: inherit; text-decoration: none; font-weight: 500; }
+
+/* ===== Typography Scale ===== */
+/* EB - H1: Sabon LT Pro Bold 68px / 76px */
+h1 {
+  font-family: var(--serif);
+  font-size: 68px;
+  font-weight: 700;
+  line-height: 76px;
+}
+/* EB - H2: Sabon LT Pro Bold 56px / 68px */
+h2 {
+  font-family: var(--serif);
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 68px;
+}
+/* EB - H3: Sabon LT Pro Bold 42px / 50px */
+h3 {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 50px;
+}
+/* EB - H4: Sabon LT Pro Bold 32px / 38px */
+h4 {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38px;
+}
+/* EB - H5: Montserrat Regular 24px / 30px */
+h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
+}
+/* EB - Block Title: Montserrat Bold 13px / 13px small-caps */
+.block-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 13px;
+  font-variant: small-caps;
+}
 
 /* ===== Buttons ===== */
+/* EB - CTA: Sabon LT Pro Bold 17px / 27px */
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--sea-buckthorn); color: #fff;
-  padding: 12px 20px; font-size: 12px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.08em; border-radius: 2px;
+  padding: 12px 20px;
+  font-family: var(--serif); font-size: 17px; font-weight: 700; line-height: 27px;
+  border-radius: 2px;
 }
 .btn-ghost {
   background: transparent; border: 1.5px solid var(--casal); color: var(--casal);
@@ -65,11 +114,12 @@ a { color: inherit; text-decoration: none; }
 .main-nav .hamburger { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
 .main-nav .hamburger span { display: block; width: 22px; height: 2px; background: #fff; }
 .main-nav .nav-links { display: none; }
+/* EB - Nav: Sabon LT Pro Bold 17px / 25px */
 .store-btn {
   background: var(--sea-buckthorn); color: #fff;
-  text-transform: uppercase; font-weight: 700; font-size: 11px;
+  font-family: var(--serif); font-weight: 700; font-size: 17px; line-height: 25px;
   padding: 10px 14px; display: inline-flex; align-items: center; gap: 6px;
-  border-radius: 2px; letter-spacing: 0.08em; white-space: nowrap;
+  border-radius: 2px; white-space: nowrap;
 }
 @media (min-width: 1024px) {
   .main-nav { padding: 18px 100px; }
@@ -77,11 +127,11 @@ a { color: inherit; text-decoration: none; }
   .main-nav .logo { font-size: 28px; }
   .main-nav .nav-links {
     display: flex; gap: 28px; flex: 1; justify-content: center;
-    font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+    font-family: var(--serif); font-size: 17px; font-weight: 700; line-height: 25px;
   }
   .main-nav .nav-links a { color: #fff; padding: 6px 0; transition: opacity 0.2s; }
   .main-nav .nav-links a:hover { opacity: 0.75; }
-  .store-btn { padding: 12px 18px; font-size: 12px; }
+  .store-btn { padding: 12px 18px; font-family: var(--serif); font-size: 17px; font-weight: 700; }
 }
 
 /* ===== Footer ===== */
@@ -91,7 +141,7 @@ a { color: inherit; text-decoration: none; }
   display: flex; flex-direction: column; gap: 28px;
 }
 .footer .col h4 {
-  font-family: var(--serif); font-size: 18px; font-weight: 700;
+  font-family: var(--serif); font-size: 32px; line-height: 38px; font-weight: 700;
   margin-bottom: 12px; color: #fff;
 }
 .footer .col p, .footer .col a {
@@ -121,6 +171,6 @@ a { color: inherit; text-decoration: none; }
   .footer .col:first-child { padding-left: 0; }
   .footer .col:last-child { padding-right: 0; }
   .footer .col + .col { border-left: 1px solid #555; }
-  .footer .col h4 { font-size: 20px; }
+  .footer .col h4 { font-size: 32px; line-height: 38px; }
   .copyright { padding: 18px; }
 }
