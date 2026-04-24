@@ -159,6 +159,219 @@ h5 {
 .store-btn span {
   display: none;
 }
+
+/* ===== Mobile Navigation Overlay ===== */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 998;
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== Mobile Navigation Menu ===== */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 340px;
+  height: 100vh;
+  background: #ffffff;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav.active {
+  transform: translateX(0);
+}
+
+/* Mobile Nav Header */
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--keyline);
+  flex-shrink: 0;
+}
+
+.mobile-nav-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mine-shaft);
+}
+
+.mobile-nav-close span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+  position: relative;
+}
+
+.mobile-nav-close span::before {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(-45deg);
+}
+
+.mobile-nav-close span::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+
+/* Mobile Nav Content */
+.mobile-nav-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+
+/* Navigation List */
+.mobile-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-nav-item {
+  border-bottom: 1px solid var(--keyline);
+}
+
+.mobile-nav-item > a,
+.mobile-nav-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  color: var(--mine-shaft);
+  font-family: 'Sabon LT Pro', 'Georgia', serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-nav-item > a:hover,
+.mobile-nav-toggle:hover {
+  background-color: var(--seashell);
+}
+
+/* Toggle Indicator */
+.toggle-indicator {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--casal);
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.mobile-nav-toggle[aria-expanded="true"] .toggle-indicator {
+  transform: rotate(180deg);
+}
+
+/* Submenu */
+.mobile-submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: var(--seashell);
+}
+
+.mobile-submenu.active {
+  max-height: 500px;
+}
+
+.mobile-submenu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-submenu-item {
+  border-bottom: 1px solid var(--keyline);
+}
+
+.mobile-submenu-item a {
+  display: block;
+  padding: 14px 16px 14px 32px;
+  color: var(--body);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mobile-submenu-item a:hover {
+  color: var(--casal);
+}
+
+/* Back to main list */
+.mobile-submenu-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px 14px 16px;
+  background: #f0f7f6;
+  border-bottom: 1px solid var(--keyline);
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--casal);
+  letter-spacing: 0.04em;
+}
+
+.mobile-submenu-back svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Footer Action */
+.mobile-nav-footer {
+  padding: 16px;
+  border-top: 1px solid var(--keyline);
+  flex-shrink: 0;
+}
+
+.mobile-nav-footer .store-btn {
+  width: 100%;
+  justify-content: center;
+}
 @media (min-width: 1024px) {
   .main-nav { padding: 18px 100px; }
   .main-nav .hamburger { display: none; }
