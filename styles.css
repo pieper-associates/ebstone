@@ -173,3 +173,95 @@ h5 {
   .footer .col h4 { font-size: 32px; line-height: 38px; }
   .copyright { padding: 18px; }
 }
+
+/* ===== About Page ===== */
+.about-container {
+  max-width: 1200px; margin: 0 auto; padding: 0 16px;
+}
+.hero-section {
+  text-align: center; padding: 40px 16px;
+  border-bottom: 1px solid var(--keyline);
+}
+.hero-section .hero-image {
+  width: 100%; max-height: 400px; object-fit: cover; margin-bottom: 24px;
+  border-radius: 4px;
+}
+.hero-section h1 {
+  margin-bottom: 12px; color: var(--casal);
+}
+.hero-section .intro-text {
+  font-family: var(--serif); font-size: 24px; color: var(--casal);
+  font-weight: 700;
+}
+
+.about-content {
+  padding: 40px 16px;
+}
+.content-grid {
+  display: grid; grid-template-columns: 1fr; gap: 40px;
+  margin-bottom: 60px;
+}
+.content-column h2 {
+  color: var(--casal); margin-bottom: 16px;
+}
+.content-column p {
+  margin-bottom: 16px; color: var(--body);
+}
+.content-column p:last-child {
+  margin-bottom: 0;
+}
+
+.sustainability-section {
+  background: var(--seashell); padding: 40px 16px;
+  border-radius: 4px; margin-bottom: 60px;
+}
+.sustainability-section h2 {
+  color: var(--casal); margin-bottom: 24px;
+}
+.sustainability-content {
+  display: grid; grid-template-columns: 1fr; gap: 24px;
+}
+.sustainability-image {
+  width: 100%; height: 300px; object-fit: cover; border-radius: 4px;
+}
+.sustainability-text p {
+  margin-bottom: 16px; color: var(--body);
+}
+.sustainability-text p:last-child {
+  margin-bottom: 0;
+}
+
+.values-section h2 {
+  color: var(--casal); margin-bottom: 32px;
+}
+.values-grid {
+  display: grid; grid-template-columns: 1fr; gap: 24px;
+}
+.value-card {
+  background: var(--seashell); padding: 24px; border-radius: 4px;
+  border-left: 4px solid var(--sea-buckthorn);
+}
+.value-card h3 {
+  color: var(--casal); font-size: 32px; line-height: 38px;
+  margin-bottom: 12px;
+}
+.value-card p {
+  color: var(--body); font-size: 15px; line-height: 27px;
+}
+
+@media (min-width: 768px) {
+  .about-container { padding: 0 32px; }
+  .hero-section { padding: 60px 32px; }
+  .about-content { padding: 60px 32px; }
+  .content-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .values-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .sustainability-content { grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .sustainability-image { height: auto; }
+}
+
+@media (min-width: 1024px) {
+  .about-container { padding: 0 100px; }
+  .hero-section { padding: 80px 100px; }
+  .about-content { padding: 80px 100px; }
+  .values-grid { grid-template-columns: repeat(4, 1fr); }
+}
