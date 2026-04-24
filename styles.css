@@ -108,9 +108,8 @@ h5 {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 16px; gap: 16px;
 }
-.main-nav .logo {
-  font-family: var(--serif); font-weight: 700; font-size: 20px; letter-spacing: 0.04em;
-}
+.main-nav .logo { display: flex; align-items: center; }
+.main-nav .logo img { height: 36px; width: auto; display: block; }
 .main-nav .hamburger { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
 .main-nav .hamburger span { display: block; width: 22px; height: 2px; background: #fff; }
 .main-nav .nav-links { display: none; }
@@ -124,7 +123,7 @@ h5 {
 @media (min-width: 1024px) {
   .main-nav { padding: 18px 100px; }
   .main-nav .hamburger { display: none; }
-  .main-nav .logo { font-size: 28px; }
+  .main-nav .logo img { height: 44px; }
   .main-nav .nav-links {
     display: flex; gap: 28px; flex: 1; justify-content: center;
     font-family: var(--serif); font-size: 17px; font-weight: 700; line-height: 25px;
@@ -144,7 +143,7 @@ h5 {
   font-family: var(--serif); font-size: 32px; line-height: 38px; font-weight: 700;
   margin-bottom: 12px; color: #fff;
 }
-.footer .col p, .footer .col a {
+.footer .col p, .footer .col a, .footer .col .row-with-icon span {
   color: #d0d0d0; font-size: 13px; line-height: 1.7; display: block;
 }
 .footer .col .row-with-icon {
