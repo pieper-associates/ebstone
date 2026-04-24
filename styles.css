@@ -157,7 +157,8 @@ h5 {
   border-radius: 2px; white-space: nowrap;
 }
 .store-btn span {
-  display: none;
+  display: none !important;
+  font-size: 0;
 }
 @media (min-width: 1024px) {
   .main-nav { padding: 18px 100px; }
@@ -170,7 +171,7 @@ h5 {
   .main-nav .nav-links a { color: #fff; padding: 6px 0; transition: opacity 0.2s; }
   .main-nav .nav-links a:hover { opacity: 0.75; }
   .store-btn { padding: 12px 18px; font-family: var(--serif); font-size: 17px; font-weight: 700; }
-  .store-btn span { display: inline; }
+  .store-btn span { display: inline !important; font-size: 17px; }
 }
 
 /* ===== Footer ===== */
