@@ -111,8 +111,41 @@ h5 {
 .main-nav .logo { display: flex; align-items: center; }
 .main-nav .logo img { height: 36px; width: auto; display: block; }
 .main-nav .hamburger { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
-.main-nav .hamburger span { display: block; width: 22px; height: 2px; background: #fff; }
+.main-nav .hamburger span { display: block; width: 22px; height: 2px; background: #fff; transition: all 0.3s ease; }
 .main-nav .nav-links { display: none; }
+.main-nav.menu-open .nav-links {
+  display: flex;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  background: var(--casal);
+  padding: 20px 16px;
+  gap: 16px;
+  z-index: 1000;
+}
+.main-nav.menu-open .nav-links a {
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 25px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.main-nav.menu-open .nav-links a:last-child {
+  border-bottom: none;
+}
+.main-nav.menu-open .hamburger span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+.main-nav.menu-open .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+.main-nav.menu-open .hamburger span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
 /* EB - Nav: Sabon LT Pro Bold 17px / 25px */
 .store-btn {
   background: var(--sea-buckthorn); color: #fff;
