@@ -176,92 +176,260 @@ h5 {
 
 /* ===== About Page ===== */
 .about-container {
-  max-width: 1200px; margin: 0 auto; padding: 0 16px;
+  display: flex;
+  flex-direction: column;
 }
-.hero-section {
-  text-align: center; padding: 40px 16px;
+
+/* Hero Section */
+.about-hero {
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 120px;
+}
+
+.about-hero .hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.about-hero .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.36);
+  z-index: 2;
+}
+
+.about-hero .hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: white;
+  padding: 0 16px;
+}
+
+.about-hero h1 {
+  color: white;
+  margin-bottom: 12px;
+}
+
+.about-hero .hero-subtitle {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 27px;
+  color: white;
+}
+
+/* Content Sections */
+.content-section {
+  padding: 60px 16px;
+}
+
+.stairstep-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.stairstep-layout.reverse {
+  flex-direction: column-reverse;
+}
+
+.text-column h2 {
+  color: var(--casal);
+  margin-bottom: 30px;
+  font-size: 42px;
+  line-height: 50px;
+}
+
+.text-column {
+  width: 100%;
+}
+
+.image-column {
+  width: 100%;
+}
+
+.image-column img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.copy-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.copy-block p {
+  color: var(--body);
+  font-size: 15px;
+  line-height: 27px;
+  margin-bottom: 16px;
+}
+
+.copy-block p:last-child {
+  margin-bottom: 0;
+}
+
+.story-section {
+  border-bottom: none;
+}
+
+.legacy-section {
+  padding-top: 120px;
+  padding-bottom: 120px;
   border-bottom: 1px solid var(--keyline);
 }
-.hero-section .hero-image {
-  width: 100%; max-height: 400px; object-fit: cover; margin-bottom: 24px;
-  border-radius: 4px;
-}
-.hero-section h1 {
-  margin-bottom: 12px; color: var(--casal);
-}
-.hero-section .intro-text {
-  font-family: var(--serif); font-size: 24px; color: var(--casal);
-  font-weight: 700;
-}
 
-.about-content {
-  padding: 40px 16px;
-}
-.content-grid {
-  display: grid; grid-template-columns: 1fr; gap: 40px;
-  margin-bottom: 60px;
-}
-.content-column h2 {
-  color: var(--casal); margin-bottom: 16px;
-}
-.content-column p {
-  margin-bottom: 16px; color: var(--body);
-}
-.content-column p:last-child {
-  margin-bottom: 0;
-}
-
+/* Sustainability Section */
 .sustainability-section {
-  background: var(--seashell); padding: 40px 16px;
-  border-radius: 4px; margin-bottom: 60px;
+  padding: 120px 16px;
+  display: flex;
+  flex-direction: column;
 }
-.sustainability-section h2 {
-  color: var(--casal); margin-bottom: 24px;
-}
+
 .sustainability-content {
-  display: grid; grid-template-columns: 1fr; gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
-.sustainability-image {
-  width: 100%; height: 300px; object-fit: cover; border-radius: 4px;
-}
-.sustainability-text p {
-  margin-bottom: 16px; color: var(--body);
-}
-.sustainability-text p:last-child {
+
+.sustainability-content h2 {
+  color: var(--casal);
+  font-size: 42px;
+  line-height: 50px;
   margin-bottom: 0;
+}
+
+/* Values Section */
+.values-section {
+  background: var(--casal);
+  padding: 90px 16px;
+  color: white;
 }
 
 .values-section h2 {
-  color: var(--casal); margin-bottom: 32px;
-}
-.values-grid {
-  display: grid; grid-template-columns: 1fr; gap: 24px;
-}
-.value-card {
-  background: var(--seashell); padding: 24px; border-radius: 4px;
-  border-left: 4px solid var(--sea-buckthorn);
-}
-.value-card h3 {
-  color: var(--casal); font-size: 32px; line-height: 38px;
-  margin-bottom: 12px;
-}
-.value-card p {
-  color: var(--body); font-size: 15px; line-height: 27px;
+  color: white;
+  font-size: 32px;
+  line-height: 38px;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.value-card {
+  background: white;
+  border: 1px solid var(--keyline);
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-image {
+  width: 100%;
+  height: 252px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.card-content h3 {
+  color: var(--casal);
+  font-size: 32px;
+  line-height: 38px;
+  margin: 0;
+}
+
+.card-content p {
+  color: var(--body);
+  font-size: 15px;
+  line-height: 27px;
+  margin: 0;
+}
+
+/* Tablet & Desktop */
 @media (min-width: 768px) {
-  .about-container { padding: 0 32px; }
-  .hero-section { padding: 60px 32px; }
-  .about-content { padding: 60px 32px; }
-  .content-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-  .values-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
-  .sustainability-content { grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-  .sustainability-image { height: auto; }
+  .about-container { padding: 0; }
+  .about-hero { height: 400px; padding: 60px 32px; }
+  .content-section { padding: 60px 32px; }
+
+  .stairstep-layout {
+    flex-direction: row;
+    gap: 30px;
+    align-items: stretch;
+  }
+
+  .stairstep-layout.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .text-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .image-column {
+    flex: 1;
+    min-height: 400px;
+  }
+
+  .image-column img {
+    height: 100%;
+  }
+
+  .sustainability-section {
+    padding: 120px 32px;
+  }
+
+  .values-section {
+    padding: 90px 32px;
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
 }
 
 @media (min-width: 1024px) {
-  .about-container { padding: 0 100px; }
-  .hero-section { padding: 80px 100px; }
-  .about-content { padding: 80px 100px; }
+  .about-hero { padding: 60px 100px; }
+  .content-section { padding: 60px 100px; }
+  .legacy-section { padding-top: 120px; padding-bottom: 120px; }
+  .sustainability-section { padding: 120px 100px; }
+  .values-section { padding: 90px 100px; }
   .values-grid { grid-template-columns: repeat(4, 1fr); }
 }

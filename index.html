@@ -71,20 +71,50 @@
     .section-desc { font-size: 15px; }
   }
 
-  /* ===== Feature Products (carousel-ish grid) ===== */
+  /* ===== Feature Products (carousel) ===== */
   .feat-products {
     background: var(--keyline);
   }
+  .feat-products .carousel-container {
+    margin-bottom: 32px;
+  }
   .feat-products .grid {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+  }
+  .product-card.hidden {
+    display: none;
   }
   @media (min-width: 640px) {
     .feat-products .grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (min-width: 1024px) {
     .feat-products .grid { grid-template-columns: repeat(5, 1fr); gap: 24px; }
+  }
+
+  /* Carousel indicators */
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--casal);
+    opacity: 0.3;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: opacity 0.2s ease;
+  }
+  .carousel-indicator:hover {
+    opacity: 0.5;
+  }
+  .carousel-indicator.active {
+    opacity: 1;
   }
   .product-card {
     background: #fff;
@@ -121,7 +151,7 @@
   }
 
   /* ===== Stairstep ===== */
-  .stairstep-center { text-align: left; max-width: 900px; margin: 0 auto; }
+  .stairstep-center { text-align: center; max-width: 900px; margin: 0 auto; }
   .stairstep-center .sub {
     font-family: var(--serif); color: white;
     font-size: 24px; line-height: 1.2; font-weight: 700; margin-bottom: 16px;
@@ -299,33 +329,61 @@
     <div class="section-header">
       <h2 class="section-title">Feature Products</h2>
     </div>
-    <div class="grid">
-      <a href="#" class="product-card">
-        <div class="thumb"></div>
-        <div class="title">Azalea, Camellia<br>&amp; Acid Mix</div>
-        <div class="more">Learn More</div>
-      </a>
-      <a href="#" class="product-card">
-        <div class="thumb"></div>
-        <div class="title">Cactus<br>&amp; Succulent Mix</div>
-        <div class="more">Learn More</div>
-      </a>
-      <a href="#" class="product-card">
-        <div class="thumb"></div>
-        <div class="title">Citrus &amp; Fruit<br>Tree Planting Mix</div>
-        <div class="more">Learn More</div>
-      </a>
-      <a href="#" class="product-card">
-        <div class="thumb"></div>
-        <div class="title">Rose &amp; Flower<br>Planting Mix</div>
-        <div class="more">Learn More</div>
-      </a>
-      <a href="#" class="product-card">
-        <div class="thumb"></div>
-        <div class="title">Organic<br>Vegetable Food</div>
-        <div class="more">Learn More</div>
-      </a>
+    <div class="carousel-container">
+      <div class="grid" id="productCarousel">
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Azalea, Camellia<br>&amp; Acid Mix</div>
+          <div class="more">Learn More</div>
+        </a>
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Cactus<br>&amp; Succulent Mix</div>
+          <div class="more">Learn More</div>
+        </a>
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Citrus &amp; Fruit<br>Tree Planting Mix</div>
+          <div class="more">Learn More</div>
+        </a>
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Rose &amp; Flower<br>Planting Mix</div>
+          <div class="more">Learn More</div>
+        </a>
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Organic<br>Vegetable Food</div>
+          <div class="more">Learn More</div>
+        </a>
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Organic<br>Vegetable Food</div>
+          <div class="more">Learn More</div>
+        </a>
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Rose &amp; Flower<br>Planting Mix</div>
+          <div class="more">Learn More</div>
+        </a>
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Azalea, Camellia<br>&amp; Acid Mix</div>
+          <div class="more">Learn More</div>
+        </a>
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Cactus<br>&amp; Succulent Mix</div>
+          <div class="more">Learn More</div>
+        </a>
+        <a href="#" class="product-card">
+          <div class="thumb"></div>
+          <div class="title">Citrus &amp; Fruit<br>Tree Planting Mix</div>
+          <div class="more">Learn More</div>
+        </a>
+      </div>
     </div>
+    <div class="carousel-indicators" id="productIndicators"></div>
   </section>
 
   <!-- Stairstep centered -->
@@ -442,5 +500,72 @@
   <div id="site-footer"></div>
 
   <script src="components.js"></script>
+
+  <script>
+    // Product Carousel functionality
+    const carousel = document.getElementById('productCarousel');
+    const indicatorsContainer = document.getElementById('productIndicators');
+    const cards = Array.from(carousel.querySelectorAll('.product-card'));
+    let currentSlide = 0;
+    let visibleCards = 2; // default for mobile
+
+    function updateVisibleCards() {
+      // Match the grid breakpoints from CSS
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        visibleCards = 5;
+      } else {
+        visibleCards = 2;
+      }
+    }
+
+    function createIndicators() {
+      indicatorsContainer.innerHTML = '';
+      const totalSlides = Math.ceil(cards.length / visibleCards);
+
+      for (let i = 0; i < totalSlides; i++) {
+        const indicator = document.createElement('button');
+        indicator.className = 'carousel-indicator';
+        if (i === 0) indicator.classList.add('active');
+        indicator.setAttribute('aria-label', `View product slide ${i + 1}`);
+        indicator.addEventListener('click', () => showSlide(i));
+        indicatorsContainer.appendChild(indicator);
+      }
+    }
+
+    function showSlide(slideIndex) {
+      currentSlide = slideIndex;
+      const startIndex = slideIndex * visibleCards;
+      const endIndex = startIndex + visibleCards;
+
+      // Hide all cards, then show only the ones for this slide
+      cards.forEach((card, index) => {
+        if (index >= startIndex && index < endIndex) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Update indicator states
+      document.querySelectorAll('.carousel-indicator').forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === slideIndex);
+      });
+    }
+
+    function handleResize() {
+      updateVisibleCards();
+      createIndicators();
+      showSlide(0); // Reset to first slide on resize
+    }
+
+    // Initialize
+    updateVisibleCards();
+    createIndicators();
+    showSlide(0);
+
+    // Handle window resize
+    window.addEventListener('resize', handleResize);
+  </script>
 </body>
 </html>
