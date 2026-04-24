@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EB Stone & Son - Navigation</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===== Mobile Navigation Overlay ===== */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 998;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ===== Mobile Navigation Menu ===== */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 340px;
+      height: 100vh;
+      background: #ffffff;
+      overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-nav.active {
+      transform: translateX(0);
+    }
+
+    /* Mobile Nav Header */
+    .mobile-nav-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-bottom: 1px solid var(--keyline);
+      flex-shrink: 0;
+    }
+
+    .mobile-nav-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mine-shaft);
+    }
+
+    .mobile-nav-close span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: currentColor;
+      position: relative;
+    }
+
+    .mobile-nav-close span::before {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      background: currentColor;
+      transform: rotate(-45deg);
+    }
+
+    .mobile-nav-close span::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 2px;
+      background: currentColor;
+      transform: rotate(45deg);
+    }
+
+    /* Mobile Nav Content */
+    .mobile-nav-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+    }
+
+    /* Navigation List */
+    .mobile-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-nav-item {
+      border-bottom: 1px solid var(--keyline);
+    }
+
+    .mobile-nav-item > a,
+    .mobile-nav-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      color: var(--mine-shaft);
+      font-family: 'Sabon LT Pro', 'Georgia', serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      transition: background-color 0.2s ease;
+    }
+
+    .mobile-nav-item > a:hover,
+    .mobile-nav-toggle:hover {
+      background-color: var(--seashell);
+    }
+
+    /* Toggle Indicator */
+    .toggle-indicator {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--casal);
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-nav-toggle[aria-expanded="true"] .toggle-indicator {
+      transform: rotate(180deg);
+    }
+
+    /* Submenu */
+    .mobile-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      background: var(--seashell);
+    }
+
+    .mobile-submenu.active {
+      max-height: 500px;
+    }
+
+    .mobile-submenu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-submenu-item {
+      border-bottom: 1px solid var(--keyline);
+    }
+
+    .mobile-submenu-item a {
+      display: block;
+      padding: 14px 16px 14px 32px;
+      color: var(--body);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .mobile-submenu-item a:hover {
+      color: var(--casal);
+    }
+
+    /* Back to main list */
+    .mobile-submenu-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px 14px 16px;
+      background: #f0f7f6;
+      border-bottom: 1px solid var(--keyline);
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--casal);
+      letter-spacing: 0.04em;
+    }
+
+    .mobile-submenu-back svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Footer Action */
+    .mobile-nav-footer {
+      padding: 16px;
+      border-top: 1px solid var(--keyline);
+      flex-shrink: 0;
+    }
+
+    .mobile-nav-footer .store-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* ===== Desktop: Hide Mobile Menu ===== */
+    @media (min-width: 1024px) {
+      .nav-overlay,
+      .mobile-nav,
+      .mobile-nav-header .mobile-nav-close {
+        display: none;
+      }
+
+      .main-nav .hamburger {
+        display: none;
+      }
+
+      .main-nav .nav-links {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Utility Bar -->
+  <div class="utility-bar">
+    <div>Dealer Portal</div>
+    <div class="search" aria-label="Search">
+      <span class="label">Search</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Main Nav -->
+  <nav class="main-nav">
+    <button class="hamburger" aria-label="Menu" aria-expanded="false" id="hamburgerBtn"><span></span><span></span><span></span></button>
+    <a href="index.html" class="logo"><img src="images/EbStoneLogo.svg" alt="EB Stone & Son" /></a>
+    <div class="nav-links">
+      <a href="about.html">About Us</a>
+      <a href="plp.html">Products</a>
+      <a href="plp.html">Vegetables</a>
+      <a href="plp.html">Fruits</a>
+      <a href="plp.html">Flowers</a>
+      <a href="plp.html">Succulents &amp; More</a>
+    </div>
+    <a href="#" class="store-btn">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span>Find A Store</span>
+    </a>
+  </nav>
+
+  <!-- Navigation Overlay -->
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- Mobile Navigation Menu -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <span style="font-family: 'Sabon LT Pro', 'Georgia', serif; font-size: 16px; font-weight: 700; color: var(--casal);">Menu</span>
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><span></span></button>
+    </div>
+
+    <div class="mobile-nav-content">
+      <!-- Main Level -->
+      <ul class="mobile-nav-list" id="mainNavList">
+        <li class="mobile-nav-item">
+          <a href="about.html">About Us</a>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-toggle" aria-expanded="false" data-submenu="products">
+            Products
+            <span class="toggle-indicator">▼</span>
+          </button>
+          <div class="mobile-submenu" id="products-submenu">
+            <ul class="mobile-submenu-list">
+              <li class="mobile-submenu-item"><a href="plp.html">Tomatoes</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Peppers</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Lettuce</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Herbs</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-toggle" aria-expanded="false" data-submenu="vegetables">
+            Vegetables
+            <span class="toggle-indicator">▼</span>
+          </button>
+          <div class="mobile-submenu" id="vegetables-submenu">
+            <ul class="mobile-submenu-list">
+              <li class="mobile-submenu-item"><a href="plp.html">Tomatoes</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Peppers</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Lettuce</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Herbs</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-toggle" aria-expanded="false" data-submenu="fruits">
+            Fruits
+            <span class="toggle-indicator">▼</span>
+          </button>
+          <div class="mobile-submenu" id="fruits-submenu">
+            <ul class="mobile-submenu-list">
+              <li class="mobile-submenu-item"><a href="plp.html">Tomatoes</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Peppers</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Lettuce</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Herbs</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-toggle" aria-expanded="false" data-submenu="flowers">
+            Flowers
+            <span class="toggle-indicator">▼</span>
+          </button>
+          <div class="mobile-submenu" id="flowers-submenu">
+            <ul class="mobile-submenu-list">
+              <li class="mobile-submenu-item"><a href="plp.html">Tomatoes</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Peppers</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Lettuce</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Herbs</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-toggle" aria-expanded="false" data-submenu="succulents">
+            Succulents &amp; More
+            <span class="toggle-indicator">▼</span>
+          </button>
+          <div class="mobile-submenu" id="succulents-submenu">
+            <ul class="mobile-submenu-list">
+              <li class="mobile-submenu-item"><a href="plp.html">Tomatoes</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Peppers</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Lettuce</a></li>
+              <li class="mobile-submenu-item"><a href="plp.html">Herbs</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mobile-nav-footer">
+      <a href="#" class="store-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        <span>Find A Store</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navOverlay = document.getElementById('navOverlay');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileNavClose = document.getElementById('mobileNavClose');
+    const toggleButtons = document.querySelectorAll('.mobile-nav-toggle');
+
+    // Open menu
+    hamburgerBtn.addEventListener('click', () => {
+      mobileNav.classList.add('active');
+      navOverlay.classList.add('active');
+      hamburgerBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Close menu
+    const closeMenu = () => {
+      mobileNav.classList.remove('active');
+      navOverlay.classList.remove('active');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+
+      // Close all submenus
+      toggleButtons.forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        const submenu = document.getElementById(`${btn.dataset.submenu}-submenu`);
+        if (submenu) {
+          submenu.classList.remove('active');
+        }
+      });
+    };
+
+    mobileNavClose.addEventListener('click', closeMenu);
+    navOverlay.addEventListener('click', closeMenu);
+
+    // Toggle submenus
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const submenuId = btn.dataset.submenu;
+        const submenu = document.getElementById(`${submenuId}-submenu`);
+        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+        btn.setAttribute('aria-expanded', !isExpanded);
+        submenu.classList.toggle('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileNav.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>
